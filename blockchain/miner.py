@@ -26,7 +26,6 @@ def proof_of_work(last_proof):
     #  TODO: Your code here
 
     while valid_proof(last_proof, proof) is False :
-        random_num = random.random() * 100000
         proof += 1
         
 
