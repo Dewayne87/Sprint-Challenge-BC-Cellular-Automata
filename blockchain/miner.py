@@ -42,6 +42,7 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
+    
     proof_string = f'{proof}'.encode()
     last_proof_string = f'{last_hash}'.encode()
     proof_hash = hashlib.sha256(proof_string).hexdigest()
