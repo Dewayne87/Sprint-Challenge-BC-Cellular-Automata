@@ -27,7 +27,7 @@ def proof_of_work(last_proof):
 
     while valid_proof(last_proof, proof) is False :
         random_num = random.random() * 100000
-        proof = int(random_num)
+        proof += 1
         
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
