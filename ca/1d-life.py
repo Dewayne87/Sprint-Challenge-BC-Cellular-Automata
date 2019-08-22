@@ -4,11 +4,22 @@ def get_new_value(old_gen, old_automata):
     # TBC - add code to generate the next row of cells,
     # then replace the return statement below to
     # return the updated automata
-    return old_automata
+    
+    newAutomata = old_automata[:]
+    for i in range(len(old_automata)-49):
+        left = i - 1
+        right = i + 1
+        newCell = old_automata[left] + old_automata[right] + old_automata[i]
+        if newCell == 0 or newCell == 3:
+            newAutomata[i+49] = 0
+        else:
+            newAutomata[i+49] = 1
+    return newAutomata
 
 # Define some colors and other constants
 BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+BLUE = (0,0,255)
 GRAY = (25, 25, 25)
 MARGIN = 3
 SQ_LENGTH = 10
@@ -77,6 +88,10 @@ while not done:
         if generations < SQ_NUM:
             generations += 1
             automata = get_new_value(generations-1, automata)
+        if generations % 2 == 0:
+            COLOR_LINE = RED
+        else:
+            COLOR_LINE = BLUE
             
         # --- Screen-clearing code goes here
     
@@ -93,7 +108,7 @@ while not done:
                 if automata[i] == 0:
                     pygame.draw.rect(screen, BLACK, pygame.Rect(x, y, SQ_LENGTH, SQ_LENGTH))
                 else:
-                    pygame.draw.rect(screen, WHITE, pygame.Rect(x, y, SQ_LENGTH, SQ_LENGTH))
+                    pygame.draw.rect(screen, COLOR_LINE, pygame.Rect(x, y, SQ_LENGTH, SQ_LENGTH))
                 i += 1
                 x += SQ_LENGTH + MARGIN
             y += SQ_LENGTH + MARGIN
